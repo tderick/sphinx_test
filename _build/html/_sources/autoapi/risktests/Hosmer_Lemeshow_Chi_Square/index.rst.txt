@@ -1,0 +1,119 @@
+:py:mod:`risktests.Hosmer_Lemeshow_Chi_Square`
+==============================================
+
+.. py:module:: risktests.Hosmer_Lemeshow_Chi_Square
+
+.. autoapi-nested-parse::
+
+   The Hosmer-Lemeshow-Chi-squared test
+
+   Created on 2022-06-08
+
+   Author: Anton Treialt
+   License: BSD(3-clause)
+
+   .. rubric:: Notes
+
+   This test measures the squared difference between forecasted and observed defaults on bucket level.
+
+   The null hypotheisis makes two assumptions:
+       -That the  forecasted default probabilities and the observed default rates are identically distributed, and;
+       -that the defaults are independent.
+   According to Blochwitz et al. (2006), under the assumptions the test statistic converges to a chi-square distribution with B-2 degrees of
+   freedom if N (the number of observations) goes to infinity. Here B is the number of credit buckets.
+
+   The hypotheses are:
+       H0: The observed number of defaults is equal to the predicted number of defaults
+       H1: The number of predicted and observed defaults are unequal.
+
+   According to Tasche(2006), this test has several drawbacks. Firstly, for buckets with low number of facilities, there might be bad approximations.
+   Second, independence between facilities (borrowers) is assumed which can be justified using a point-in-time approach. Thirdly, the model makes no
+   distinction between deviations that are conservative or optimisitc even though they have different impact.Furthermore, the composed model test assumes
+   independence, but does take into account the difference between conservative and optimistic deviations.
+
+   .. rubric:: References
+
+   1.Blochwitz, S., Martin, M. R. W., & Wehn, C. S. (2006). Statistical Approaches to PD Validation.
+       In B. Engelmann & R. Rauhmeier (Eds.), The Basel II Risk Parameters: Estimation, Validation, and Stress Testing
+        (pp. 289–306). Springer. https://doi.org/10.1007/3-540-33087-9_13
+
+   2.Tasche, D. (2006). Validation of internal rating systems and PD estimates (arXiv:physics/0606071).
+       arXiv. http://arxiv.org/abs/physics/0606071
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   risktests.Hosmer_Lemeshow_Chi_Square.Hosmer_Lemeshow_Chi_Square
+
+
+
+
+.. py:class:: Hosmer_Lemeshow_Chi_Square(data, buckets_col, loan_statuses_col, PDs_col, alpha, verbose=False)
+
+   Performs the Hosmer-Lemeshow Chi-Square test to validate credit data given the loan buckets, loan statuses and probabilitities of default.
+
+   Assumes at least a 3D dataframe or 3D array-like dataset is passed to the arguement 'data' but requires the buckets column, loan status column and probability-of-default column names to be
+   passed to the corresponding arguments.
+
+   If verbose is set to True, the test results and interpretation will be printed, the default is False.
+
+   alpha must be set otherwise a TypeError is raised.
+   :param
+   data : array_like, 3-D of higher
+   buckets_col : name of column with buckets
+   loan_status_col : name of column with loan statuses
+   PDs_col : name of column with probabilities-of-default
+   alpha: the tests level of significance. either 1%, 5% or 10%
+   verbose: boolean. Prints the results if true.
+   :return
+   data: data passed into the function call
+   bucket_levels: unique buckets in the data
+   HLC_stat: Hosmer-Lemeshow test statistic
+   alpha: the test's significance level
+   p_value: the test's p-value
+   verbose: boolean passed to function call to print results or not.
+   critical_value: the critical value of the test
+   dof: the test's degrees of freedom
+
+   .. rubric:: Example
+
+   >>import Hosmer_Lemeshow_Chi_Square as HLC
+   >>import pandas as pd
+   >>import numpy as np
+
+   >># Sampling the buckets randomly at fixed probabilities
+   >>buckets = np.random.choice(a=["Bucket one","Bucket two","Bucket three","Bucket four","Bucket five"], p = [0.15,0.25,0.05,0.05,0.5], size=1000)
+   >>loan_status = np.random.choice(a=["default", "non-default"], p=[0.3,0.7], size=1000)
+
+   >>probs = []
+
+   >>for i in range(len(buckets)):
+   >>    if buckets[i] == 'Bucket one':
+   >>        probs.append(0.15)
+   >>    elif buckets[i] == 'Bucket two':
+   >>        probs.append(0.25)
+   >>    elif buckets[i] == 'Bucket three':
+   >>        probs.append(0.05)
+   >>    elif buckets[i] == 'Bucket four':
+   >>        probs.append(0.05)
+   >>    elif buckets[i] == 'Bucket five':
+   >>        probs.append(0.5)
+   >>
+   >>probs = np.array(probs)
+
+   >>loan_data = pd.DataFrame({'loan_bucket': buckets,
+   >>                          'loan_status': loan_status,
+   >>                          'PD': probs})
+
+   >>output = HLC.Hosmer_Lemeshow_Chi_Square(data=loan_data, buckets_col='loan_bucket', loan_statuses_col='loan_status', PDs_col='PD', alpha=0.05, verbose=True)
+   >>output.HLC_stat # Shows the Hower-Lemeshow statistic
+   >>output.p_value # Shows the p-value
+
+

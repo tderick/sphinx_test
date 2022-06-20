@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>risktests.Hosmer_Lemeshow_Chi_Square &#8212; Credit Risk Validation Tests 0.1.0 documentation</title>
+<script>
+  document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
+</script>
+
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+
+
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+    <div class="bd-header-announcement container-fluid" id="banner">
+      
+
+    </div>
+
+    
+    <nav class="bd-header navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Credit Risk Validation Tests 0.1.0 documentation</p>
+  
+</a>
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fas fa-bars"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../installation.html">
+  Installation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../usage.html">
+  Usage
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../contributing.html">
+  Contributing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../authors.html">
+  Credits
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../history.html">
+  History
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../autoapi/index.html">
+  API Reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <span id="theme-switch" class="btn btn-sm btn-outline-primary navbar-btn rounded-circle">
+    <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="bd-container container-xl">
+      <div class="bd-container__inner row">
+          
+
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
+  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+  </div>
+  <div class="sidebar-end-items">
+  </div>
+</div>
+
+
+          
+
+
+<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+  
+</div>
+
+
+          
+          
+          <div class="bd-content col-12 col-md-9 col-xl-7">
+              
+              <article class="bd-article" role="main">
+                
+  <h1>Source code for risktests.Hosmer_Lemeshow_Chi_Square</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The Hosmer-Lemeshow-Chi-squared test</span>
+
+<span class="sd">    Created on 2022-06-08</span>
+
+<span class="sd">    Author: Anton Treialt</span>
+<span class="sd">    License: BSD(3-clause)</span>
+
+<span class="sd">    NOTES</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    This test measures the squared difference between forecasted and observed defaults on bucket level.</span>
+
+<span class="sd">    The null hypotheisis makes two assumptions:</span>
+<span class="sd">        -That the  forecasted default probabilities and the observed default rates are identically distributed, and;</span>
+<span class="sd">        -that the defaults are independent.</span>
+<span class="sd">    According to Blochwitz et al. (2006), under the assumptions the test statistic converges to a chi-square distribution with B-2 degrees of</span>
+<span class="sd">    freedom if N (the number of observations) goes to infinity. Here B is the number of credit buckets.</span>
+
+<span class="sd">    The hypotheses are:</span>
+<span class="sd">        H0: The observed number of defaults is equal to the predicted number of defaults</span>
+<span class="sd">        H1: The number of predicted and observed defaults are unequal.</span>
+
+<span class="sd">    According to Tasche(2006), this test has several drawbacks. Firstly, for buckets with low number of facilities, there might be bad approximations.</span>
+<span class="sd">    Second, independence between facilities (borrowers) is assumed which can be justified using a point-in-time approach. Thirdly, the model makes no</span>
+<span class="sd">    distinction between deviations that are conservative or optimisitc even though they have different impact.Furthermore, the composed model test assumes</span>
+<span class="sd">    independence, but does take into account the difference between conservative and optimistic deviations.</span>
+
+<span class="sd">    REFERENCES</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    1.Blochwitz, S., Martin, M. R. W., &amp; Wehn, C. S. (2006). Statistical Approaches to PD Validation.</span>
+<span class="sd">        In B. Engelmann &amp; R. Rauhmeier (Eds.), The Basel II Risk Parameters: Estimation, Validation, and Stress Testing</span>
+<span class="sd">         (pp. 289–306). Springer. https://doi.org/10.1007/3-540-33087-9_13</span>
+
+<span class="sd">    2.Tasche, D. (2006). Validation of internal rating systems and PD estimates (arXiv:physics/0606071).</span>
+<span class="sd">        arXiv. http://arxiv.org/abs/physics/0606071</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="c1">#  THE TEST FUNCTION</span>
+<div class="viewcode-block" id="Hosmer_Lemeshow_Chi_Square"><a class="viewcode-back" href="../../autoapi/risktests/Hosmer_Lemeshow_Chi_Square/index.html#risktests.Hosmer_Lemeshow_Chi_Square.Hosmer_Lemeshow_Chi_Square">[docs]</a><span class="k">class</span> <span class="nc">Hosmer_Lemeshow_Chi_Square</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs the Hosmer-Lemeshow Chi-Square test to validate credit data given the loan buckets, loan statuses and probabilitities of default.</span>
+
+<span class="sd">    Assumes at least a 3D dataframe or 3D array-like dataset is passed to the arguement &#39;data&#39; but requires the buckets column, loan status column and probability-of-default column names to be</span>
+<span class="sd">    passed to the corresponding arguments.</span>
+
+<span class="sd">    If verbose is set to True, the test results and interpretation will be printed, the default is False.</span>
+
+<span class="sd">    alpha must be set otherwise a TypeError is raised.</span>
+<span class="sd">    :param</span>
+<span class="sd">    data : array_like, 3-D of higher</span>
+<span class="sd">    buckets_col : name of column with buckets</span>
+<span class="sd">    loan_status_col : name of column with loan statuses</span>
+<span class="sd">    PDs_col : name of column with probabilities-of-default</span>
+<span class="sd">    alpha: the tests level of significance. either 1%, 5% or 10%</span>
+<span class="sd">    verbose: boolean. Prints the results if true.</span>
+<span class="sd">    :return</span>
+<span class="sd">    data: data passed into the function call</span>
+<span class="sd">    bucket_levels: unique buckets in the data</span>
+<span class="sd">    HLC_stat: Hosmer-Lemeshow test statistic</span>
+<span class="sd">    alpha: the test&#39;s significance level</span>
+<span class="sd">    p_value: the test&#39;s p-value</span>
+<span class="sd">    verbose: boolean passed to function call to print results or not.</span>
+<span class="sd">    critical_value: the critical value of the test</span>
+<span class="sd">    dof: the test&#39;s degrees of freedom</span>
+
+<span class="sd">    EXAMPLE</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;import Hosmer_Lemeshow_Chi_Square as HLC</span>
+<span class="sd">    &gt;&gt;import pandas as pd</span>
+<span class="sd">    &gt;&gt;import numpy as np</span>
+
+<span class="sd">    &gt;&gt;# Sampling the buckets randomly at fixed probabilities</span>
+<span class="sd">    &gt;&gt;buckets = np.random.choice(a=[&quot;Bucket one&quot;,&quot;Bucket two&quot;,&quot;Bucket three&quot;,&quot;Bucket four&quot;,&quot;Bucket five&quot;], p = [0.15,0.25,0.05,0.05,0.5], size=1000)</span>
+<span class="sd">    &gt;&gt;loan_status = np.random.choice(a=[&quot;default&quot;, &quot;non-default&quot;], p=[0.3,0.7], size=1000)</span>
+
+<span class="sd">    &gt;&gt;probs = []</span>
+
+<span class="sd">    &gt;&gt;for i in range(len(buckets)):</span>
+<span class="sd">    &gt;&gt;    if buckets[i] == &#39;Bucket one&#39;:</span>
+<span class="sd">    &gt;&gt;        probs.append(0.15)</span>
+<span class="sd">    &gt;&gt;    elif buckets[i] == &#39;Bucket two&#39;:</span>
+<span class="sd">    &gt;&gt;        probs.append(0.25)</span>
+<span class="sd">    &gt;&gt;    elif buckets[i] == &#39;Bucket three&#39;:</span>
+<span class="sd">    &gt;&gt;        probs.append(0.05)</span>
+<span class="sd">    &gt;&gt;    elif buckets[i] == &#39;Bucket four&#39;:</span>
+<span class="sd">    &gt;&gt;        probs.append(0.05)</span>
+<span class="sd">    &gt;&gt;    elif buckets[i] == &#39;Bucket five&#39;:</span>
+<span class="sd">    &gt;&gt;        probs.append(0.5)</span>
+<span class="sd">    &gt;&gt;</span>
+<span class="sd">    &gt;&gt;probs = np.array(probs)</span>
+
+<span class="sd">    &gt;&gt;loan_data = pd.DataFrame({&#39;loan_bucket&#39;: buckets,</span>
+<span class="sd">    &gt;&gt;                          &#39;loan_status&#39;: loan_status,</span>
+<span class="sd">    &gt;&gt;                          &#39;PD&#39;: probs})</span>
+
+
+
+<span class="sd">    &gt;&gt;output = HLC.Hosmer_Lemeshow_Chi_Square(data=loan_data, buckets_col=&#39;loan_bucket&#39;, loan_statuses_col=&#39;loan_status&#39;, PDs_col=&#39;PD&#39;, alpha=0.05, verbose=True)</span>
+<span class="sd">    &gt;&gt;output.HLC_stat # Shows the Hower-Lemeshow statistic</span>
+<span class="sd">    &gt;&gt;output.p_value # Shows the p-value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">buckets_col</span><span class="p">,</span> <span class="n">loan_statuses_col</span><span class="p">,</span> <span class="n">PDs_col</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="c1"># Checking for any missing data</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;No data provided!&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">alpha</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;No value provided for alpha. Please input a value for alpha.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">buckets_col</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;No column name for buckets provided&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">loan_statuses_col</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;No column name for loan statuses provided&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">PDs_col</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;No column name for probabilities of default (PDs) provided&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Checking that the correct datatype</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">buckets_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;buckets_col not of type string&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">loan_statuses_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;loan_statuses_col not of type string&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">PDs_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;PDs_col not of type string&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;alpha should be a float value&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;verbose should be a boolean value&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># Check if the correct column names have been provided</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">buckets_col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not a column in the data provided&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">buckets_col</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">loan_statuses_col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not a column in the data provided&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loan_statuses_col</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">PDs_col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not a column in the data provided&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PDs_col</span><span class="p">))</span>
+
+        <span class="c1"># Check the data for missing values</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">buckets_col</span><span class="p">]</span><span class="o">.</span><span class="n">hasnans</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;There are missing values in the </span><span class="si">{}</span><span class="s1"> column&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">buckets_col</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">loan_statuses_col</span><span class="p">]</span><span class="o">.</span><span class="n">hasnans</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;There are missing values in the </span><span class="si">{}</span><span class="s1"> column&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loan_statuses_col</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">PDs_col</span><span class="p">]</span><span class="o">.</span><span class="n">hasnans</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;There are missing values in the </span><span class="si">{}</span><span class="s1"> column&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PDs_col</span><span class="p">))</span>
+
+        <span class="n">buckets</span><span class="p">,</span> <span class="n">loan_statuses</span><span class="p">,</span> <span class="n">PDs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">buckets_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">loan_statuses_col</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">PDs_col</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bucket_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">buckets</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+
+        <span class="k">def</span> <span class="nf">HLC_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Calculates the Hosmer-Lemeshow Chi-square statistic</span>
+<span class="sd">            :param self:</span>
+<span class="sd">            :return: HLC statistic, degrees of freedom, probabilities of default in each bucket</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">Ni</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">di</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">pi</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">HLC_stat</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket_levels</span><span class="p">)):</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">buckets</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">bucket_levels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">Ni</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+                <span class="n">di</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">loan_statuses</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+                <span class="n">pi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">PDs</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+                <span class="n">HLC_stat</span> <span class="o">=</span> <span class="n">HLC_stat</span> <span class="o">+</span> <span class="p">(</span><span class="n">Ni</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">di</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">Ni</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">PDs</span> <span class="o">=</span> <span class="n">pi</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket_levels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">HLC_stat</span> <span class="o">=</span> <span class="n">HLC_stat</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">HLC_stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PDs</span>
+
+
+        <span class="k">def</span> <span class="nf">HLC_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Calculates the critical value of the Chi-square test using the degrees of freedom and alpha</span>
+<span class="sd">            :param self:</span>
+<span class="sd">            :param alpha:</span>
+<span class="sd">            :return: critical value of the Chi-square test</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">critical_value</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">),</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">critical_value</span> <span class="o">=</span> <span class="n">critical_value</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_value</span>
+
+
+        <span class="k">def</span> <span class="nf">HLC_pvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Calculate the p-value of the HLC statistic using the Chi-square cdf and the degrees of freedom</span>
+<span class="sd">            :param self:</span>
+<span class="sd">            :return: p-value of the HLC statistic</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HLC_stat</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span> <span class="o">=</span> <span class="n">p_value</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span>
+        <span class="c1"># Populating the HLC statistic object, the degrees of freedom object, the probabilities of default object, the critical values object</span>
+        <span class="c1"># and the p-value objects</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">HLC_stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PDs</span> <span class="o">=</span> <span class="n">HLC_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_value</span> <span class="o">=</span> <span class="n">HLC_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span> <span class="o">=</span> <span class="n">HLC_pvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># print the results</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HLC_statistic=</span><span class="si">%.3f</span><span class="s2">, df=</span><span class="si">%d</span><span class="s2">, cv=</span><span class="si">%.3f</span><span class="s2">, p=</span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HLC_stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-value &lt;= alpha, therefore, the null hypothesis that the observed number of defaults is equal to the predicted number of defaults is rejected.&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;P-value &gt; alpha, therefore, the null hypothesis that the observed number of defaults is equal to the predicted number of defaults fails to be rejected.&quot;</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+              </article>
+              
+
+              
+              <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              </footer>
+              
+          </div>
+          
+      </div>
+    </div>
+
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+
+<footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    <p class="copyright">
+    &copy; Copyright 2022, Anton Treialt.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br>
+</p>
+  </div>
+  
+</div>
+</footer>
+  </body>
+</html>

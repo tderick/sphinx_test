@@ -1,0 +1,51 @@
+:py:mod:`risktests.LGD_t_test`
+==============================
+
+.. py:module:: risktests.LGD_t_test
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   risktests.LGD_t_test.lgd_t_test
+
+
+
+.. py:function:: lgd_t_test(df, observed_LGD_col, expected_LGD_col, verbose=False)
+
+   t-test for the Null hypothesis that estimated LGD is greater than true LGD
+
+
+   :param df: data
+   :type df: array-like, at least 2D
+   :param observed_LGD_col: name of column with observed LGD values
+   :type observed_LGD_col: string
+   :param expected_LGD_col: name of column with expected LGD values
+   :type expected_LGD_col: string
+   :param verbose: if true, results and interpretation are printed
+   :type verbose: boolean
+
+   :returns: * **N** (*integer*) -- Number of customers
+             * **LGD.mean** (*float*) -- Mean value of observed LGD values
+             * **pred_LGD.mean** (*float*) -- Mean value of predicted LGD values
+             * **t_stat** (*float*) -- test statistic
+             * **lgd_s2** (*float*) -- denominator of test statistic
+             * **p_value** (*float*) -- p-value of the test
+
+   .. rubric:: Notes
+
+   Observations are assumed to be independent.
+   This fundtion can be used for both performing and non-performing LGDs.
+
+   .. rubric:: Examples
+
+   >>res = lgd_t_test(df=df, observed_LGD_col='LGD', expected_LGD_col='PRED_LGD', verbose=True)
+   >>print(res)
+
+

@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>risktests.Stability_of_Migration_Matrices &#8212; Credit Risk Validation Tests 0.1.0 documentation</title>
+<script>
+  document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
+</script>
+
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+
+
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+    <div class="bd-header-announcement container-fluid" id="banner">
+      
+
+    </div>
+
+    
+    <nav class="bd-header navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Credit Risk Validation Tests 0.1.0 documentation</p>
+  
+</a>
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fas fa-bars"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../installation.html">
+  Installation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../usage.html">
+  Usage
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../contributing.html">
+  Contributing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../authors.html">
+  Credits
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../history.html">
+  History
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../autoapi/index.html">
+  API Reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <span id="theme-switch" class="btn btn-sm btn-outline-primary navbar-btn rounded-circle">
+    <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="bd-container container-xl">
+      <div class="bd-container__inner row">
+          
+
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
+  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+  </div>
+  <div class="sidebar-end-items">
+  </div>
+</div>
+
+
+          
+
+
+<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+  
+</div>
+
+
+          
+          
+          <div class="bd-content col-12 col-md-9 col-xl-7">
+              
+              <article class="bd-article" role="main">
+                
+  <h1>Source code for risktests.Stability_of_Migration_Matrices</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<div class="viewcode-block" id="df"><a class="viewcode-back" href="../../autoapi/risktests/Stability_of_Migration_Matrices/index.html#risktests.Stability_of_Migration_Matrices.df">[docs]</a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;synthetic_pd.xlsx&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="migration_matrix_stability"><a class="viewcode-back" href="../../autoapi/risktests/Stability_of_Migration_Matrices/index.html#risktests.Stability_of_Migration_Matrices.migration_matrix_stability">[docs]</a><span class="k">def</span> <span class="nf">migration_matrix_stability</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">initial_ratings_col</span><span class="p">,</span> <span class="n">final_ratings_col</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;z-tests to verify stability of transition matrices</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df: array-like, at least 2D</span>
+<span class="sd">        data</span>
+<span class="sd">    initial_ratings_col: string</span>
+<span class="sd">        name of column with initial ratings values</span>
+<span class="sd">    final_ratings_col: string</span>
+<span class="sd">        name of column with final ratings values</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    z_df: array-like</span>
+<span class="sd">        z statistic for each ratings pair</span>
+<span class="sd">    phi_df: array-like</span>
+<span class="sd">        p-values for each ratings pair</span>
+
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----------</span>
+<span class="sd">    The Null hypothesis is that p_ij &gt;= p_ij-1 or p_ij-1 &gt;= p_ij</span>
+<span class="sd">    depending on whether the (ij) entry is below or above main diagonal</span>
+
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;res = migration_matrix_stability(df=df, initial_ratings_col=&#39;ratings&#39;, final_ratings_col=&#39;ratings2&#39;)</span>
+<span class="sd">    &gt;&gt;print(res)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">initial_ratings_col</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">final_ratings_col</span><span class="p">]</span>
+    <span class="n">N_ij</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">p_ij</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+    <span class="n">z_df</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+
+                <span class="n">z_ij</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">Ni</span> <span class="o">=</span> <span class="n">N_ij</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">num</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">den_a</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">Ni</span>
+                <span class="n">den_b</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">Ni</span>
+                <span class="n">den_c</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">Ni</span>
+
+                <span class="n">z_ij</span> <span class="o">=</span> <span class="n">num</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">den_a</span> <span class="o">+</span> <span class="n">den_b</span> <span class="o">+</span> <span class="n">den_c</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">Ni</span> <span class="o">=</span> <span class="n">N_ij</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">num</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">den_a</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">Ni</span>
+                <span class="n">den_b</span> <span class="o">=</span> <span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">Ni</span>
+                <span class="n">den_c</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_ij</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">Ni</span>
+
+                <span class="n">z_ij</span> <span class="o">=</span> <span class="n">num</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">den_a</span> <span class="o">+</span> <span class="n">den_b</span> <span class="o">+</span> <span class="n">den_c</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">z_ij</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+            <span class="n">z_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_ij</span>
+    <span class="n">phi_df</span> <span class="o">=</span> <span class="n">z_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">z_df</span><span class="p">,</span> <span class="n">phi_df</span></div>
+</pre></div>
+
+              </article>
+              
+
+              
+              <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              </footer>
+              
+          </div>
+          
+      </div>
+    </div>
+
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+
+<footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    <p class="copyright">
+    &copy; Copyright 2022, Anton Treialt.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br>
+</p>
+  </div>
+  
+</div>
+</footer>
+  </body>
+</html>

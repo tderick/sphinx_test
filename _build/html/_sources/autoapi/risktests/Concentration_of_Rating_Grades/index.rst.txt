@@ -1,0 +1,46 @@
+:py:mod:`risktests.Concentration_of_Rating_Grades`
+==================================================
+
+.. py:module:: risktests.Concentration_of_Rating_Grades
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   risktests.Concentration_of_Rating_Grades.ratings_concentration
+
+
+
+.. py:function:: ratings_concentration(df, initial_ratings_col, final_ratings_col)
+
+   test for the meaningful dispersion of the rating grades
+
+   :param df: data
+   :type df: array-like, at least 2D
+   :param initial_ratings_col: name of column with initial ratings
+   :type initial_ratings_col: string
+   :param final_ratings_col: name of column with final ratings
+   :type final_ratings_col: string
+
+   :returns: * **H_init** (*float*) -- Initial Herfindahl index
+             * **H_curr** (*float*) -- Final Herfindahl index
+             * **p_value** (*float*) -- p-value of the test
+             * **N** (*integer*) -- Number of customers or facilities
+
+   .. rubric:: Notes
+
+   Observations are assumed to be independent.
+   This function can be used for both performing and non-performing LGDs.
+
+   .. rubric:: Examples
+
+   >>res = ratings_concentration(df=df, initial_ratings_col='ratings', final_ratings_col='ratings2')
+   >>print(res)
+
+

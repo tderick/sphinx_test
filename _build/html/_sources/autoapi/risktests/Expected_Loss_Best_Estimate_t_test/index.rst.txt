@@ -1,0 +1,50 @@
+:py:mod:`risktests.Expected_Loss_Best_Estimate_t_test`
+======================================================
+
+.. py:module:: risktests.Expected_Loss_Best_Estimate_t_test
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   risktests.Expected_Loss_Best_Estimate_t_test.elbe_t_test
+
+
+
+.. py:function:: elbe_t_test(df, LGD_col, ELBE_col, verbose=False)
+
+   t-test of Null hypothesis that ELBE is equal to realised LGD.
+
+
+   :param df: data
+   :type df: array-like, at least 2D
+   :param LGD_col: name of column with LGD values
+   :type LGD_col: string
+   :param ELBE_col: name of column with ELBE values
+   :type ELBE_col: string
+   :param verbose: if true, results and interpretation are printed
+   :type verbose: boolean
+
+   :returns: * **N** (*integer*) -- Number of customers
+             * **LGD.mean** (*float*) -- Mean value of LGD
+             * **ELBE.mean** (*float*) -- Mean value of ELBE
+             * **t_stat** (*float*) -- test statistic
+             * **s2** (*float*) -- denominator of test statistic
+             * **p_value** (*float*) -- p-value of the test
+
+   .. rubric:: Notes
+
+   Observations are assumed to be independent.
+
+   .. rubric:: Examples
+
+   >>res = elbe_t_test(df=df, LGD_col='LGD', ELBE_col='ELBE', verbose=True)
+   >>print(res)
+
+

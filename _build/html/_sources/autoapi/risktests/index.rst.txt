@@ -1,0 +1,43 @@
+:py:mod:`risktests`
+===================
+
+.. py:module:: risktests
+
+.. autoapi-nested-parse::
+
+   Top-level package for Credit Risk Validation Tests.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   Concentration_of_Rating_Grades/index.rst
+   Expected_Loss_Best_Estimate_t_test/index.rst
+   Hosmer_Lemeshow_Chi_Square/index.rst
+   Jeffreys_test/index.rst
+   LGD_t_test/index.rst
+   Stability_of_Migration_Matrices/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __author__
+   :annotation: = Anton Treialt
+
+   
+
+.. py:data:: __email__
+   :annotation: = anton.treialt@aistat.com
+
+   
+
+.. py:data:: __version__
+   :annotation: = 0.1.0
+
+   
+

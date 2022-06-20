@@ -1,0 +1,49 @@
+:py:mod:`risktests.Jeffreys_test`
+=================================
+
+.. py:module:: risktests.Jeffreys_test
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   risktests.Jeffreys_test.jeffreys_test
+
+
+
+.. py:function:: jeffreys_test(df, ratings_col, PDs_col, defaults_col, alpha=0.05)
+
+   :param df: data
+   :type df: array-like, at least 2D
+   :param ratings_col: name of column with ratings
+   :type ratings_col: string
+   :param PDs_col: name of column with probabilities-of-default values
+   :type PDs_col: string
+   :param defaults_col: name of column with default statuses
+   :type defaults_col: string
+   :param alpha: level of significance
+   :type alpha: float
+   :param verbose: if true, results and interpretation are printed
+   :type verbose: boolean
+
+   :returns: **results** -- dataframe with p-value for each rating and other statistics
+   :rtype: 7D array-like object
+
+   .. rubric:: Notes
+
+   Observations are assumed to be independent.
+   This fundtion can be used for both performing and non-performing LGDs.
+
+   .. rubric:: Examples
+
+   >>df = pd.read_excel('sample_data.xlsx')
+   >>outpput = jeffreys_test(df=df, ratings_col='ratings', PDs_col='PD', defaults_col='loan_status', alpha=0.05)
+   >>print(output)
+
+
